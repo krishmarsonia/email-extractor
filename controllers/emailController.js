@@ -6,11 +6,13 @@ const Promise = require("bluebird");
 Promise.longStackTraces();
 const MailParser = require("mailparser").MailParser;
 
+require("dotenv").config();
+
 exports.getMailData = (req, res, next) => {
   console.log("hii");
   var imap = new Imap({
-    user: "krinixmarsonia@gmail.com",
-    password: "wuqc rcfs rucc graj",
+    user: process.env.EMAIL,
+    password: process.env.PASSWORD,
     host: "imap.gmail.com",
     port: 993,
     tls: true,
