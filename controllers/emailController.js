@@ -8,6 +8,8 @@ const MailParser = require("mailparser").MailParser;
 
 require("dotenv").config();
 
+require("dotenv").config();
+
 exports.getMailData = (req, res, next) => {
   console.log("hii");
   var imap = new Imap({
