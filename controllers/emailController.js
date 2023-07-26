@@ -13,9 +13,11 @@ exports.getMailData = (req, res, next) => {
   var imap = new Imap({
     user: process.env.EMAIL,
     password: process.env.PASSWORD,
-    host: "imap.gmail.com",
+    host: process.env.HOST,
     port: 993,
     tls: true,
+    authTimeout: 25000,
+    connTimeout: 30000,
     tlsOptions: { rejectUnauthorized: false },
   });
   Promise.promisifyAll(imap);
