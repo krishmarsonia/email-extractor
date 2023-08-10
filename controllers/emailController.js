@@ -48,14 +48,21 @@ exports.getMailData = (req, res, next) => {
           console.log("Processing msg #" + seqNo);
           var parser = new MailParser();
           parser.on("headers", function (headers) {
-            console.log("Headers: " + JSON.stringify(headers));
-          });
+            const time = new Date(headers.get("date"));
+            const times = time.getHours() + ":" + time.getMinutes();
+            const email = headers.values().next().value.text;
 
-          parser.on("data", (data) => {
-            if (data.type === "text") {
-              console.log(seqNo);
-              console.log(data.text);
-            }
+            parser.on("data", (data) => {
+              if (data.type === "text") {
+                console.log("--------------");
+                console.log(seqNo);
+                console.log(email);
+                console.log(times);
+                console.log(data.text);
+                console.log("--------------");
+              }
+            });
+            
           });
 
           message.on("body", function (stream) {
